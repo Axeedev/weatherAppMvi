@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -7,6 +9,15 @@ plugins {
 
     kotlin("plugin.serialization") version "2.2.10"
 }
+
+private val keystore= rootProject.file("keystore.properties")
+private val properties = keystore.inputStream().use { inputStream ->
+
+    Properties().apply {
+        load(inputStream)
+    }
+}
+private val apiKey = properties.getProperty("API_KEY")
 
 android {
     namespace = "com.example.weatherappmvi"
@@ -18,7 +29,7 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
+        buildConfigField("String","API_KEY", "$apiKey")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -40,6 +51,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -49,7 +61,6 @@ dependencies {
     implementation(libs.mvikotlin.coroutines)
     implementation(libs.decompose.core)
     implementation(libs.decompose.jetpack)
-
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
