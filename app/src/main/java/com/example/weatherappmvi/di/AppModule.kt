@@ -6,6 +6,20 @@ import com.example.weatherappmvi.BuildConfig
 import com.example.weatherappmvi.data.api.ApiService
 import com.example.weatherappmvi.data.local.CitiesDao
 import com.example.weatherappmvi.data.local.Database
+import com.example.weatherappmvi.data.repository.FavouriteRepositoryImpl
+import com.example.weatherappmvi.data.repository.SearchRepositoryImpl
+import com.example.weatherappmvi.data.repository.WeatherRepositoryImpl
+import com.example.weatherappmvi.domain.repository.FavouriteRepository
+import com.example.weatherappmvi.domain.repository.SearchRepository
+import com.example.weatherappmvi.domain.repository.WeatherRepository
+import com.example.weatherappmvi.domain.usecases.AddToFavouriteCitiesUseCase
+import com.example.weatherappmvi.domain.usecases.GetCurrentWeatherUseCase
+import com.example.weatherappmvi.domain.usecases.GetFavouriteCitiesUseCase
+import com.example.weatherappmvi.domain.usecases.GetForecastUseCase
+import com.example.weatherappmvi.domain.usecases.ObserveIsFavouriteUseCase
+import com.example.weatherappmvi.domain.usecases.RemoveFromFavouriteUseCase
+import com.example.weatherappmvi.domain.usecases.SearchCityUseCase
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +35,16 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 interface AppModule {
 
+
+    @Singleton
+    @Binds
+    fun bindFavRepository(favouriteRepositoryImpl: FavouriteRepositoryImpl): FavouriteRepository
+    @Singleton
+    @Binds
+    fun bindSearchRepository(searchRepositoryImpl: SearchRepositoryImpl): SearchRepository
+    @Singleton
+    @Binds
+    fun bindWeatherRepository(weatherRepositoryImpl: WeatherRepositoryImpl): WeatherRepository
 
     companion object {
 
@@ -64,6 +88,35 @@ interface AppModule {
         @Provides
         fun provideDao(database: Database): CitiesDao = database.citiesDao()
 
+
+        @Singleton
+        @Provides
+        fun provideAddToFavouriteUseCase(repository: FavouriteRepository): AddToFavouriteCitiesUseCase =
+            AddToFavouriteCitiesUseCase(repository)
+        @Singleton
+        @Provides
+        fun provideGetCurrentWeatherUseCase(repository: WeatherRepository): GetCurrentWeatherUseCase =
+            GetCurrentWeatherUseCase(repository)
+        @Singleton
+        @Provides
+        fun provideGetFavCities(repository: FavouriteRepository): GetFavouriteCitiesUseCase =
+            GetFavouriteCitiesUseCase(repository)
+        @Singleton
+        @Provides
+        fun provideGetForecastUseCase(repository: WeatherRepository): GetForecastUseCase =
+            GetForecastUseCase(repository)
+        @Singleton
+        @Provides
+        fun provideObserveIsFavUseCase(repository: FavouriteRepository): ObserveIsFavouriteUseCase =
+            ObserveIsFavouriteUseCase(repository)
+        @Singleton
+        @Provides
+        fun provideRemoveFromFav(repository: FavouriteRepository): RemoveFromFavouriteUseCase =
+            RemoveFromFavouriteUseCase(repository)
+        @Singleton
+        @Provides
+        fun provideSearchCity(repository: SearchRepository): SearchCityUseCase =
+            SearchCityUseCase(repository)
 
         private const val BASE_URL = "https://api.weatherapi.com/v1/"
 

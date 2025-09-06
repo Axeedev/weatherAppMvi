@@ -17,7 +17,6 @@ class WeatherRepositoryImpl(
     override suspend fun getForecast(id: Int): WeatherForecast {
         return apiService.getForecast("$PREFIX_CITY_ID$id").toWeatherForecast()
     }
-
     private companion object{
         private const val PREFIX_CITY_ID = "id:"
     }
