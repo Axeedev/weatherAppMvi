@@ -2,6 +2,8 @@ package com.example.weatherappmvi.di
 
 import android.content.Context
 import androidx.room.Room
+import com.arkivanov.mvikotlin.core.store.StoreFactory
+import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.example.weatherappmvi.BuildConfig
 import com.example.weatherappmvi.data.api.ApiService
 import com.example.weatherappmvi.data.local.CitiesDao
@@ -89,34 +91,8 @@ interface AppModule {
         fun provideDao(database: Database): CitiesDao = database.citiesDao()
 
 
-        @Singleton
         @Provides
-        fun provideAddToFavouriteUseCase(repository: FavouriteRepository): AddToFavouriteCitiesUseCase =
-            AddToFavouriteCitiesUseCase(repository)
-        @Singleton
-        @Provides
-        fun provideGetCurrentWeatherUseCase(repository: WeatherRepository): GetCurrentWeatherUseCase =
-            GetCurrentWeatherUseCase(repository)
-        @Singleton
-        @Provides
-        fun provideGetFavCities(repository: FavouriteRepository): GetFavouriteCitiesUseCase =
-            GetFavouriteCitiesUseCase(repository)
-        @Singleton
-        @Provides
-        fun provideGetForecastUseCase(repository: WeatherRepository): GetForecastUseCase =
-            GetForecastUseCase(repository)
-        @Singleton
-        @Provides
-        fun provideObserveIsFavUseCase(repository: FavouriteRepository): ObserveIsFavouriteUseCase =
-            ObserveIsFavouriteUseCase(repository)
-        @Singleton
-        @Provides
-        fun provideRemoveFromFav(repository: FavouriteRepository): RemoveFromFavouriteUseCase =
-            RemoveFromFavouriteUseCase(repository)
-        @Singleton
-        @Provides
-        fun provideSearchCity(repository: SearchRepository): SearchCityUseCase =
-            SearchCityUseCase(repository)
+        fun provideStoreFactory() : StoreFactory = DefaultStoreFactory()
 
         private const val BASE_URL = "https://api.weatherapi.com/v1/"
 
