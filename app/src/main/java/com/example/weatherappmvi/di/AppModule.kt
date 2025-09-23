@@ -14,13 +14,6 @@ import com.example.weatherappmvi.data.repository.WeatherRepositoryImpl
 import com.example.weatherappmvi.domain.repository.FavouriteRepository
 import com.example.weatherappmvi.domain.repository.SearchRepository
 import com.example.weatherappmvi.domain.repository.WeatherRepository
-import com.example.weatherappmvi.domain.usecases.AddToFavouriteCitiesUseCase
-import com.example.weatherappmvi.domain.usecases.GetCurrentWeatherUseCase
-import com.example.weatherappmvi.domain.usecases.GetFavouriteCitiesUseCase
-import com.example.weatherappmvi.domain.usecases.GetForecastUseCase
-import com.example.weatherappmvi.domain.usecases.ObserveIsFavouriteUseCase
-import com.example.weatherappmvi.domain.usecases.RemoveFromFavouriteUseCase
-import com.example.weatherappmvi.domain.usecases.SearchCityUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -41,9 +34,11 @@ interface AppModule {
     @Singleton
     @Binds
     fun bindFavRepository(favouriteRepositoryImpl: FavouriteRepositoryImpl): FavouriteRepository
+
     @Singleton
     @Binds
     fun bindSearchRepository(searchRepositoryImpl: SearchRepositoryImpl): SearchRepository
+
     @Singleton
     @Binds
     fun bindWeatherRepository(weatherRepositoryImpl: WeatherRepositoryImpl): WeatherRepository

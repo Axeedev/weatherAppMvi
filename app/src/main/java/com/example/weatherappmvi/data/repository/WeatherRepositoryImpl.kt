@@ -6,8 +6,9 @@ import com.example.weatherappmvi.data.mappers.toWeatherForecast
 import com.example.weatherappmvi.domain.entity.Weather
 import com.example.weatherappmvi.domain.entity.WeatherForecast
 import com.example.weatherappmvi.domain.repository.WeatherRepository
+import javax.inject.Inject
 
-class WeatherRepositoryImpl(
+class WeatherRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ): WeatherRepository {
     override suspend fun getWeatherByCity(id: Int): Weather {
