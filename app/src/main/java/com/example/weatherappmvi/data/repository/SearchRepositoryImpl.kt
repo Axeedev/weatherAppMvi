@@ -14,7 +14,9 @@ class SearchRepositoryImpl @Inject constructor(
     override suspend fun search(query: String): List<City> {
         Log.d("SearchRepositoryImpl", "started")
         return try {
-            apiService.getCities(query).map { it.toEntity() }
+            apiService.getCities(query).map {
+                it.toEntity()
+            }
         }catch (e: Exception){
             Log.d("SearchRepositoryImpl", e.toString())
             listOf()

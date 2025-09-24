@@ -37,8 +37,21 @@ object GradientUtil {
             fourthColor = Color(0xFF00BECD)
         ),
     )
+    val buttonGradient = Gradient(
+        firstColor = Color(0xFF00E5FF),
+        secondColor = Color(0xFF1200FF),
+        thirdColor = Color(0xFFFFD700),
+        fourthColor = Color(0xFF00BECD)
+    )
+
+    val detailsBackgroundGradient = Gradient(
+        firstColor = Color(0xFF1200FF),
+        secondColor = Color(0xFF00E5FF),
+        thirdColor = Color(0xFFFFD700),
+        fourthColor = Color(0xFF00BECD)
+    )
 
 
-
+    fun getGradientByIndex(index: Int) = list[index % list.size]
 
 }

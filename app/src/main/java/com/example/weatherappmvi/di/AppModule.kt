@@ -21,6 +21,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -48,7 +49,11 @@ interface AppModule {
         @Singleton
         @Provides
         fun provideApiService(): ApiService {
+            val interceptor = HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }
             val client = OkHttpClient.Builder()
+                .addInterceptor(interceptor)
                 .addInterceptor { chain ->
                     val original = chain.request()
                     val newUrl = original

@@ -52,11 +52,11 @@ class DefaultFavouritesComponent @AssistedInject constructor(
     }
 
     override fun onCityCLick(city: City) {
-        FavouritesStore.Intent.ClickCity(city)
+        store.accept(FavouritesStore.Intent.ClickCity(city))
     }
 
     override fun onSearchButtonClick() {
-        FavouritesStore.Intent.ClickSearch
+       store.accept( FavouritesStore.Intent.ClickSearch)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)

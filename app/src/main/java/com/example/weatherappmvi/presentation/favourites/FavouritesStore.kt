@@ -123,10 +123,12 @@ class FavouritesStoreFactory @Inject constructor(
             dispatch(Msg.WeatherLoading(city.id))
             try {
                 val weather = getCurrentWeatherUseCase(city.id)
+
+                Log.d("FavouritesStoreFactory", weather.conditionImageUrl)
                 dispatch(Msg.WeatherLoaded(
                     id = city.id,
                     tempC = weather.tempC,
-                    imageUrl = weather.conditionImageUrl
+                    imageUrl = weather.conditionImageUrl.replace(oldValue = "::", newValue = ":")
                 ))
             } catch (e: Exception) {
                 Log.d("FavouritesStoreFactory", e.message ?: "")

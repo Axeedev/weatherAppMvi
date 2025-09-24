@@ -56,6 +56,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.logging.interceptor)
     implementation(libs.mvikotlin.core)
     implementation(libs.mvikotlin.main)
     implementation(libs.mvikotlin.coroutines)
