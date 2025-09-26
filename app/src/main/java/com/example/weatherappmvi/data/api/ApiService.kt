@@ -18,7 +18,7 @@ interface ApiService {
     @GET("forecast.json")
     suspend fun getForecast(
         @Query("q") query: String,
-        @Query("day") days: Int = 4
+        @Query("days") days: Int = 3
     ): WeatherForecastDto
 
     @GET("search.json")

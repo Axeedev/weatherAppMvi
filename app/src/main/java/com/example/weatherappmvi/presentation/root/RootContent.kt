@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.example.weatherappmvi.presentation.details.DetailsContent
 import com.example.weatherappmvi.presentation.favourites.FavouriteContent
+import com.example.weatherappmvi.presentation.search.SearchContent
 
 @Composable
 fun RootContent(component: RootComponent){
@@ -18,7 +19,7 @@ fun RootContent(component: RootComponent){
                 FavouriteContent(favouritesComponent = instance.component)
             }
             is RootComponent.Child.Search -> {
-
+                SearchContent(component = instance.component)
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.example.weatherappmvi.presentation.search
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.example.weatherappmvi.domain.entity.City
@@ -22,7 +23,7 @@ class DefaultSearchComponent @AssistedInject constructor(
 ) : SearchComponent, ComponentContext by componentContext{
 
 
-    private val store = storeFactory.create(openReason)
+    private val store = instanceKeeper.getStore { storeFactory.create(openReason) }
 
 
     init {

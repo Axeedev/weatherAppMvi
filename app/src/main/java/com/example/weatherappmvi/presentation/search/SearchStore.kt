@@ -69,13 +69,12 @@ class SearchStoreFactory @Inject constructor(
     fun create(openReason: OpenReason): SearchStore =
         object : SearchStore, Store<Intent, SearchStore.State, SearchStore.Label>
         by storeFactory.create(
-            name = "Search store",
             initialState = SearchStore.State("", SearchStore.State.QueryState.Initial),
-            bootstrapper = BootstrapperImpl,
+            bootstrapper = BootstrapperImpl(),
             executorFactory = {
                 ExecutorImpl(openReason)
             },
-            reducer = ReducerImpl()
+            reducer = ReducerImpl
         ) {}
 
 
@@ -91,10 +90,9 @@ class SearchStoreFactory @Inject constructor(
 
         data class Loaded(val cities: List<City>) : Msg
 
-
     }
 
-    object BootstrapperImpl : CoroutineBootstrapper<Action>() {
+    private inner class BootstrapperImpl : CoroutineBootstrapper<Action>() {
         override fun invoke() {
         }
     }
@@ -149,7 +147,7 @@ class SearchStoreFactory @Inject constructor(
         }
     }
 
-    private inner class ReducerImpl : Reducer<SearchStore.State, Msg> {
+    private object ReducerImpl : Reducer<SearchStore.State, Msg> {
         override fun SearchStore.State.reduce(msg: Msg): SearchStore.State {
             return when (msg) {
                 is Msg.ChangeQuery -> {
